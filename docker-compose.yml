@@ -1,23 +1,21 @@
-version: '3.6'
+version: '3.0'
 
 services:
   zookeeper:
-    restart: always
     ports:
       - 2181:2181
     container_name: zookeeper
-    build: 
+    build:
       context: .
       dockerfile: zookeeper/Dockerfile
     networks:
-      - kafka
-    volumes:
-      - ~/Desktop/kafka-zoo:/tmp/zookeeper
+      - kafka2
+
   server:
     ports:
       - 9092:9092
     container_name: server
-    build: 
+    build:
       context: .
       dockerfile: server/Dockerfile
     depends_on:
@@ -27,29 +25,29 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_CREATE_TOPICS: 'test'
     networks:
-      - kafka
+      - kafka2
     volumes:
-      - ~/Desktop/kafka-data:/tmp/kafka-logs
+      - /var/lib/docker/volumes/storage
   producer:
     container_name: producer
-    build: 
+    build:
       context: .
       dockerfile: producer/Dockerfile
     depends_on:
       - zookeeper
       - server
     networks:
-      - kafka
+      - kafka2
 
   consumer:
     container_name: consumer
-    build: 
+    build:
       context: .
       dockerfile: consumer/Dockerfile
     depends_on:
       - zookeeper
       - server
     networks:
-      - kafka
+      - kafka2
 networks:
-  kafka:
+  kafka2:
