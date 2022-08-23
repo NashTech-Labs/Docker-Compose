@@ -25,4 +25,4 @@ In consumer terminal you see message `HELLO`
 
 ![Screenshot from 2022-08-23 19-16-49](https://user-images.githubusercontent.com/94070460/186175804-825fd77f-1296-4a10-a1d9-883965184bfe.png)
 
-For more infromation refer - https://blog.knoldus.com/how-to-solve-producer-and-consumer-problems/
+For more information refer - https://blog.knoldus.com/how-to-solve-producer-and-consumer-problems/
